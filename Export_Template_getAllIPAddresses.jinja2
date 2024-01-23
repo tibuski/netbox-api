@@ -1,0 +1,8 @@
+Device,Interface,IP Address,FQDN
+{% for ip in queryset -%}
+{% if ip.assigned_object.device -%}
+{{ ip.assigned_object.device }},{{ip.assigned_object}},{{ip.address}}},{% if ip.dns_name %}{{ ip.dns_name }}{% else %}NO FQDN{% endif %}
+{% elif ip.assigned_object.virtual_machine -%}
+{{ ip.assigned_object.virtual_machine }},{{ip.assigned_object}},{{ip.address}}},{% if ip.dns_name %}{{ ip.dns_name }}{% else %}NO FQDN{% endif %}
+{% else -%}
+{% endif %}{% endfor %}
